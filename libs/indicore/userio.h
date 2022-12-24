@@ -19,7 +19,12 @@
 #pragma once
 
 #include <stdarg.h>
-#include <indimacros.h>
+
+#ifdef _WIN32
+#include <windows.h>
+#else
+#include <sys/types.h>
+#endif
 
 #ifdef __cplusplus
 extern "C" {
@@ -27,7 +32,7 @@ extern "C" {
 
 typedef struct userio
 {
-    ssize_t (*write)(void *user, const void * ptr, size_t count);
+    size_t (*write)(void *user, const void * ptr, size_t count);
     int (*vprintf)(void *user, const char * format, va_list arg);
 
     // join the given shared buffer as ancillary data. xml must be at least one char - optional
@@ -36,15 +41,15 @@ typedef struct userio
 
 const struct userio *userio_file();
 
-ssize_t userio_printf(const struct userio *io, void *user, const char * format, ...);
-ssize_t userio_vprintf(const struct userio *io, void *user, const char * format, va_list arg);
+int userio_printf(const struct userio *io, void *user, const char * format, ...);
+int userio_vprintf(const struct userio *io, void *user, const char * format, va_list arg);
 
-ssize_t userio_write(const struct userio *io, void *user, const void * ptr, size_t count);
+size_t userio_write(const struct userio *io, void *user, const void * ptr, size_t count);
 
-ssize_t userio_putc(const struct userio *io, void *user, int ch);
+int userio_putc(const struct userio *io, void *user, int ch);
 
 // extras
-ssize_t userio_prints(const struct userio *io, void *user, const char *str);
+int userio_prints(const struct userio *io, void *user, const char *str);
 size_t userio_xml_escape(const struct userio *io, void *user, const char *src);
 void userio_xmlv1(const userio *io, void *user);
 

@@ -15,6 +15,10 @@ list(APPEND ${PROJECT_NAME}_LIBS
     ${ZLIB_LIBRARY}
 )
 
+if(MINGW)
+    list(APPEND ${PROJECT_NAME}_LIBS Ws2_32)
+endif(MINGW)
+
 # Sources
 list(APPEND ${PROJECT_NAME}_SOURCES
     baseclient.cpp
