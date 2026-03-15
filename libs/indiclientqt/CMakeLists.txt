@@ -36,7 +36,7 @@ list(APPEND ${PROJECT_NAME}_LIBS
     indidevice
     indiabstractclient
     Qt${QT_VERSION_MAJOR}::Network
-    ${ZLIB_LIBRARY}
+    ZLIB::ZLIB
 )
 
 # Sources
