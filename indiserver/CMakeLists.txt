@@ -24,7 +24,7 @@ else()
                                    Msg.cpp
                                    Utils.cpp)
 
-    target_link_libraries(indiserver indicore ${CMAKE_THREAD_LIBS_INIT} ${LIBEV_LIBRARIES})
+    target_link_libraries(indiserver indicore Threads::Threads ${LIBEV_LIBRARIES})
     target_include_directories(indiserver SYSTEM PRIVATE ${LIBEV_INCLUDE_DIRS})
 
     install(TARGETS indiserver RUNTIME DESTINATION bin)
