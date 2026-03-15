@@ -51,7 +51,7 @@ class INDI::BaseClientQt : public QObject, public INDI::AbstractBaseClient
 
     public:
         BaseClientQt(QObject *parent = Q_NULLPTR);
-        virtual ~BaseClientQt();
+        ~BaseClientQt() override;
 
     public:
         /** @brief Connect to INDI server.
@@ -65,7 +65,7 @@ class INDI::BaseClientQt : public QObject, public INDI::AbstractBaseClient
          *  @return True if disconnection is successful, false otherwise.
          */
         bool disconnectServer(int exit_code = 0) override;
-    
+
     private:
         void enableDirectBlobAccess(const char * dev = nullptr, const char * prop = nullptr) = delete; // not implemented
 };
