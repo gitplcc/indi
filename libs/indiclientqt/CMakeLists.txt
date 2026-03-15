@@ -19,7 +19,7 @@ if(ANDROID)
         set(CFITSIO_INCLUDE_DIR ${CFITSIO_DIR})
         set(CFITSIO_LIBRARIES ${CFITSIO_DIR}/libcfitsio.a)
     endif()
-    
+
     set(QT_VERSION_MAJOR 5)
 else()
     # Try Qt6 first, fall back to Qt5 if not found
@@ -27,7 +27,7 @@ else()
     find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Network)
     find_package(ZLIB REQUIRED)
     find_package(CFITSIO REQUIRED)
-    
+
     message(STATUS "Using Qt${QT_VERSION_MAJOR} for indiclientqt")
 endif()
 
@@ -57,7 +57,10 @@ list(APPEND ${PROJECT_NAME}_PRIVATE_HEADERS
 # Build Object Library
 add_library(${PROJECT_NAME}_OBJECT OBJECT)
 set_property(TARGET ${PROJECT_NAME}_OBJECT PROPERTY POSITION_INDEPENDENT_CODE 1)
-
+set_target_properties(${PROJECT_NAME}_OBJECT
+    PROPERTIES
+        AUTOMOC ON
+)
 target_include_directories(${PROJECT_NAME}_OBJECT
     PUBLIC .
 )
