@@ -14,8 +14,8 @@ list(APPEND ${PROJECT_NAME}_LIBS
     indidevice
     indiabstractclient
     sockets
-    ${CMAKE_THREAD_LIBS_INIT}
-    ${ZLIB_LIBRARY}
+    Threads::Threads
+    ZLIB::ZLIB
 )
 
 # Sources
